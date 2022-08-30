@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<button onclick="one()" style="background: yellow">Bài 1</button>
+<button onclick="two()" style="background: purple">Bài 2</button>
+<button onclick="three()" style="background: red">Bài 3</button>
+<button onclick="four()" style="background: blue;">Bài 4</button>
+<canvas id="canvas" width="800" height="800" style="border: 1px black"></canvas>
+</body>
+</html>
+<script>
+    // Bài 1 :
+    function one() {
+        let arrayPoint = [];
+        let n = +prompt("Số điểm có trong mảng:")
+
+        function duyetMang(n) {
+            for (let i = 0; i < n; i++) {
+                arrayPoint[i] = +prompt("Nhập điểm vào vị trí: " + i + ":");
+            }
+        }
+
+        function findAvg(arrayPoint) {
+            let sum = 0;
+            let avg;
+            let x = arrayPoint;
+            for (let i = 0; i < x.length; i++) {
+                sum += x[i];
+            }
+            avg = sum / (x.length);
+            return avg;
+        }
+
+        duyetMang(n);
+        alert("Giá trị trung bình là: " + findAvg(arrayPoint));
+    }
+
+    // Bài 2:
+    function two() {
+        let x = +prompt('Nhập số nguyên x: ');
+        let index = +prompt('Nhập vị trí cân đối: ')
+        let arr = [];
+        let n = +prompt("Nhập số phần tử có trong mảng: ");
+
+        function insertNumberToArray(n) {
+            for (let i = 0; i < n; i++) {
+                arr[i] = +prompt('Nhập giá trị tại vị trí :' + i + ": ");
+            }
+            if (arr[index] < 0 || arr[index] > arr.length) {
+                return arr;
+            } else {
+                let newArr = new Array(arr.length + 1);
+                for (let i = 0; i < newArr.length; i++) {
+                    if (i < index) {
+                        newArr[i] = arr[i];
+                    } else if (i === index) {
+                        newArr[i] = x;
+                    } else {
+                        newArr[i] = arr[i - 1];
+                    }
+                }
+                return newArr;
+            }
+        }
+
+        alert("Kết quả:" + insertNumberToArray(n))
+    }
+
+    // Bài 3:
+    function three() {
+        let so = +prompt("Nhập số x: ")
+        let sum = 0;
+        let flag = 1;
+
+        function sumOfListPrime(so) {
+            for (let j = 0; j <= so; j++) {
+                if (j < 2) {
+                    continue;
+                } else {
+                    for (let i = 2; i <= Math.sqrt(j); i++) {
+                        if (j % i === 0) {
+                            flag += 1;
+                            break;
+                        }
+                    }
+                }
+                if (flag === 1) {
+                    sum = sum + j;
+                    flag = 1;
+
+                } else {
+                    flag = 1;
+                }
+            }
+            return sum;
+        }
+
+        alert("Tổng các số nguyên tố đến x: " + sumOfListPrime(so));
+    }
+
+    // Bài 4:
+    function four() {
+        class Rectangle {
+            x;
+            y;
+            width;
+            height;
+            color;
+
+            constructor(x, y, width, height, c) {
+
+                this.x = x;
+                this.y = y;
+                this.width = width;
+                this.height = height;
+
+
+                this.color = c;
+
+            }
+
+            render(canvas) {
+                let ctx = canvas.getContext('2d');
+                ctx.fillStyle = this.color;
+                ctx.fillRect(this.x, this.y, this.width, this.height);
+
+            }
+        }
+
+        let canvas = document.getElementById('canvas');
+        let hcn = new Rectangle(100, 100, 400, 200, "blue");
+        hcn.render(canvas)
+    }
+</script>
